@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
     @Autowired
-    BookServiceImpl bookService;
+    private BookServiceImpl bookService;
 
     @RequestMapping("/add")
     public ResultVO addBook(Book book){
@@ -33,7 +33,7 @@ public class BookController {
             return ResultVO.success(null);
         }
         else{
-            return ResultVO.failed();
+            return ResultVO.failed(String.valueOf(result));
         }
     }
 

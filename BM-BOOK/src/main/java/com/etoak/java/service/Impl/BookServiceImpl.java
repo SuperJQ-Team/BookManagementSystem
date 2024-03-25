@@ -51,7 +51,12 @@ public class BookServiceImpl
         }
 
         if(book.getBookLabel() != null && !"".equals(book.getBookLabel())){
-            wrapper.like("book_label", book.getBookLabel());
+            String[] labels = book.getBookLabel().split(",");
+            for(String s : labels){
+                if(!"".equals(s)) {
+                    wrapper.like("book_label", s);
+                }
+            }
         }
 
         return bookMapper.selectList(wrapper);
