@@ -17,4 +17,6 @@ public interface IBookService extends IService<Book>{
     Book getBookById(Integer id);
 
     Book getBookByNo(String bookNo);
+
+    int updateBookStateByNo(String no, Integer State);
 }

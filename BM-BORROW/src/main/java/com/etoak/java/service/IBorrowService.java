@@ -6,5 +6,5 @@ import com.etoak.java.entity.Borrow;
 public interface IBorrowService extends IService<Borrow> {
     int borrowBook(Integer userId, String bookNo);
 
-    int backBook(Integer bookNo);
+    int backBook(String bookNo);
 }
