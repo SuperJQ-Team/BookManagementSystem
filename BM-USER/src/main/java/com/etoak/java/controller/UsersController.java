@@ -77,8 +77,8 @@ public class UsersController {
     }
 
     @RequestMapping("/underCreditLevelAndBlock")
-    public ResultVO underCreditLevelAndBlock(Integer userId, Integer changeVal){
-        int result = usersService.updateCreditLevelAndBlock(userId,changeVal);
+    public ResultVO underCreditLevelAndBlock(Integer userId){
+        int result = usersService.updateCreditLevelAndBlock(userId,-1);
         if(result>0){
             return ResultVO.success(null);
         }else{

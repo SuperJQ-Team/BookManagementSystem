@@ -69,7 +69,7 @@ public class BorrowServiceImpl
     }
 
     @Override
-    public int backBook(String bookNo) {
+    public int backBook(Integer bookNo) {
         if(bookNo == null){
             return 101;
         }
@@ -97,14 +97,13 @@ public class BorrowServiceImpl
             //逾期归还
             state = 2;
             //信用等级下调并在归零后封禁
-            userServiceFeign.underCreditLevelAndBlock(borrow.getUserId(), -1);
+            userServiceFeign.underCreditLevelAndBlock(borrow.getUserId());
         }
 
         borrow.setReturnTime(returnTime);
         borrow.setStatus(state);
         borrow.setComment(state == 1 ? "正常归还" : "逾期归还");
 
-        bookServiceFeign.updateBookStateByNo(bookNo, 0);
         borrowMapper.updateById(borrow);
 
         return 200;

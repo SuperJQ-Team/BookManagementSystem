@@ -10,5 +10,5 @@ public interface IUserServiceFeign {
     ResultVO getUserById(Integer id);
 
     @RequestMapping("/users/underCreditLevelAndBlock")
-    ResultVO underCreditLevelAndBlock(Integer userId, Integer changeVal);
+    ResultVO underCreditLevelAndBlock(Integer userId);
 }
