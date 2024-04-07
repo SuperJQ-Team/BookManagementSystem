@@ -80,15 +80,4 @@ public class BookController {
             return ResultVO.failed();
         }
     }
-
-    @RequestMapping("/updateBookStateByNo")
-    public ResultVO updateBookStateByNo(String no, Integer state){
-        int result = bookService.updateBookStateByNo(no, state);
-        if(result > 0) {
-            return ResultVO.success(null);
-        }
-        else{
-            return ResultVO.failed();
-        }
-    }
 }

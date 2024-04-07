@@ -86,10 +86,4 @@ public class BookServiceImpl
 
         return bookMapper.selectOne(wrapper);
     }
-
-    @Override
-    public int updateBookStateByNo(String no, Integer state) {
-
-        return bookMapper.updateBookStateByNo(no, 1);
-    }
 }

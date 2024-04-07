@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/borrow")
 public class BorrowController {
     @Autowired
     private BorrowServiceImpl borrowService;
     @Autowired
     private IUserServiceFeign userServiceFeign;
 
-    @RequestMapping("/borrow")
+    @RequestMapping("/book")
     public ResultVO borrowBook(Integer userId, String bookNo){
-        System.out.println(bookNo);
+
         int request = borrowService.borrowBook(userId, bookNo);
         if(request == 200){
             return ResultVO.success(null);
@@ -30,8 +31,8 @@ public class BorrowController {
         return userServiceFeign.getUserById(id);
     }
 
-    @RequestMapping("/return")
-    public ResultVO backBook(String bookNo){
+    @RequestMapping("/back")
+    public ResultVO backBook(Integer bookNo){
         int result = borrowService.backBook(bookNo);
         if(result == 200){
             return ResultVO.success(null);
