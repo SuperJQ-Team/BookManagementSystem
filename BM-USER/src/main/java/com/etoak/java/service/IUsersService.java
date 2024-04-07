@@ -5,9 +5,7 @@ import com.etoak.java.entity.Users;
 
 import java.util.List;
 
-/**
- * @author Bromine
- */
+
 public interface IUsersService extends IService<Users> {
     /*
       1.新增用户
