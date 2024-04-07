@@ -20,7 +20,7 @@ public class OrderController {
         if(request > 0){
             return ResultVO.success(null);
         }else{
-            return ResultVO.failed(String.valueOf(request));
+            return ResultVO.failed(null);
         }
     }
 
@@ -30,7 +30,7 @@ public class OrderController {
         if(request > 0){
             return ResultVO.success(null);
         }else{
-            return ResultVO.failed(String.valueOf(request));
+            return ResultVO.failed(null);
         }
     }
 
