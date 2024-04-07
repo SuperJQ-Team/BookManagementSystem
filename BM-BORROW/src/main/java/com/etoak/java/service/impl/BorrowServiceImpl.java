@@ -31,20 +31,20 @@ public class BorrowServiceImpl
     @Override
     public int borrowBook(Integer userId, String bookNo) {
         /*
-        * 1.判断学生的禁用情况
-        * 2.判断bookNo状态
-        * 3.生成一条借阅记录
-        * 4.更新书的状态 -> 已借出
-        */
+         * 1.判断学生的禁用情况
+         * 2.判断bookNo状态
+         * 3.生成一条借阅记录
+         * 4.更新书的状态 -> 已借出
+         */
         //1
         String baseUrl = "http://bm-user-service/users/getBlockStatus";
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl)
-                .queryParam("userId",userId);
+                .queryParam("userId", userId);
         String url = builder.toUriString();
         ResultVO<Integer> blockResultObj = restTemplate.getForObject(url, ResultVO.class);
 
         Integer blockStatus = blockResultObj.getData();
-        if(blockStatus == null || blockStatus == 1){
+        if (blockStatus == null || blockStatus == 1) {
             return 110;
         }
 
@@ -54,7 +54,7 @@ public class BorrowServiceImpl
         String bookStatus = (String) bookResultObj.getData();
         System.out.println(bookStatus);
 
-        if("1".equals(bookStatus)){
+        if ("1".equals(bookStatus)) {
             return 120;
         }
         //3
@@ -70,16 +70,16 @@ public class BorrowServiceImpl
 
     @Override
     public int backBook(Integer bookNo) {
-        if(bookNo == null){
+        if (bookNo == null) {
             return 101;
         }
 
-        QueryWrapper<Borrow> queryWrapper =new QueryWrapper<>();
-        queryWrapper.eq( "book_no" ,bookNo);
-        queryWrapper.orderBy(  false,false,  "create_time");
+        QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("book_no", bookNo);
+        queryWrapper.orderBy(false, false, "create_time");
         Borrow borrow = borrowMapper.selectOne(queryWrapper);
 
-        if(borrow == null){
+        if (borrow == null) {
             // 借阅记录为空
             return 102;
         }
@@ -92,8 +92,7 @@ public class BorrowServiceImpl
         //初始状态为正常归还
         int state = 1;
 
-        if(days > borrow.getDuration())
-        {
+        if (days > borrow.getDuration()) {
             //逾期归还
             state = 2;
             //信用等级下调并在归零后封禁

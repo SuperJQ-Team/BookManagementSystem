@@ -17,68 +17,62 @@ public class BookController {
     private BookServiceImpl bookService;
 
     @GetMapping("/add")
-    public ResultVO addBook(Book book){
+    public ResultVO addBook(Book book) {
         System.out.println(book);
         int result = bookService.addBook(book);
-        if(result>0) {
+        if (result > 0) {
             return ResultVO.success(null);
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/delete")
-    public ResultVO deleteBook(Integer id){
+    public ResultVO deleteBook(Integer id) {
         int result = bookService.deleteBook(id);
-        if(result>0) {
+        if (result > 0) {
             return ResultVO.success(null);
-        }
-        else{
+        } else {
             return ResultVO.failed(String.valueOf(result));
         }
     }
 
     @RequestMapping("/list")
-    public ResultVO getBooks(Book book){
+    public ResultVO getBooks(Book book) {
         List<Book> result = bookService.getBooks(book);
-        if(!result.isEmpty()) {
+        if (!result.isEmpty()) {
             return ResultVO.success(result);
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/update")
-    public ResultVO updateBook(Book book){
+    public ResultVO updateBook(Book book) {
         int result = bookService.updateBook(book);
-        if(result>0) {
+        if (result > 0) {
             return ResultVO.success(null);
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/getById")
-    public ResultVO getById(Integer id){
+    public ResultVO getById(Integer id) {
         Book result = bookService.getBookById(id);
-        if(result != null) {
+        if (result != null) {
             return ResultVO.success(result);
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/getStatusByNo")
-    public ResultVO getById(String no){
+    public ResultVO getById(String no) {
         Book result = bookService.getBookByNo(no);
-        if(result != null) {
+        if (result != null) {
             return ResultVO.success(result.getStatus());
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }

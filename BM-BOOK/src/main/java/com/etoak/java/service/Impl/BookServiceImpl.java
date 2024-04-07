@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class BookServiceImpl
-        extends ServiceImpl < BookMapper, Book >
+        extends ServiceImpl<BookMapper, Book>
         implements IBookService {
     @Autowired
     BookMapper bookMapper;
@@ -24,7 +24,7 @@ public class BookServiceImpl
 
     @Override
     public int deleteBook(Integer bookId) {
-        if(bookId == null){
+        if (bookId == null) {
             return 0;
         }
         return bookMapper.deleteById(bookId);
@@ -34,26 +34,26 @@ public class BookServiceImpl
     public List<Book> getBooks(Book book) {
         QueryWrapper<Book> wrapper = new QueryWrapper<>();
 
-        if(book.getBookName() != null && !"".equals(book.getBookName())){
+        if (book.getBookName() != null && !"".equals(book.getBookName())) {
             wrapper.like("book_name", book.getBookName());
         }
 
-        if(book.getAuthor() != null && !"".equals(book.getAuthor())){
+        if (book.getAuthor() != null && !"".equals(book.getAuthor())) {
             wrapper.like("author", book.getAuthor());
         }
 
-        if(book.getBookNo() != null && !"".equals(book.getBookNo())){
+        if (book.getBookNo() != null && !"".equals(book.getBookNo())) {
             wrapper.like("book_no", book.getBookNo());
         }
 
-        if(book.getPublisher() != null && !"".equals(book.getPublisher())){
+        if (book.getPublisher() != null && !"".equals(book.getPublisher())) {
             wrapper.like("publisher", book.getPublisher());
         }
 
-        if(book.getBookLabel() != null && !"".equals(book.getBookLabel())){
+        if (book.getBookLabel() != null && !"".equals(book.getBookLabel())) {
             String[] labels = book.getBookLabel().split(",");
-            for(String s : labels){
-                if(!"".equals(s)) {
+            for (String s : labels) {
+                if (!"".equals(s)) {
                     wrapper.like("book_label", s);
                 }
             }
@@ -69,7 +69,7 @@ public class BookServiceImpl
 
     @Override
     public Book getBookById(Integer id) {
-        if(id == null){
+        if (id == null) {
             return null;
         }
         return bookMapper.selectById(id);
@@ -77,7 +77,7 @@ public class BookServiceImpl
 
     @Override
     public Book getBookByNo(String bookNo) {
-        if(bookNo == null || "".equals(bookNo)){
+        if (bookNo == null || "".equals(bookNo)) {
             return null;
         }
 

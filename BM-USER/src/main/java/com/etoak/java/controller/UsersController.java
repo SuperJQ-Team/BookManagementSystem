@@ -23,67 +23,64 @@ public class UsersController {
     UsersServiceImpl usersService;
 
     @RequestMapping("/add")
-    public ResultVO addUsers(Users users){
+    public ResultVO addUsers(Users users) {
         int result = usersService.addUser(users);
-        if(result>0) {
+        if (result > 0) {
             return ResultVO.success(null);
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/list")
-    public ResultVO getUsersList(Users users){
+    public ResultVO getUsersList(Users users) {
         List<Users> usersList = usersService.getUsersList(users);
         return ResultVO.success(usersList);
     }
 
     @RequestMapping("/delete")
-    public ResultVO deleteUsers(Integer id){
+    public ResultVO deleteUsers(Integer id) {
         int result = usersService.deleteById(id);
-        if(result>0) {
+        if (result > 0) {
             return ResultVO.success(null);
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/block")
-    public ResultVO blockUsers(Integer id){
+    public ResultVO blockUsers(Integer id) {
         int result = usersService.blockById(id);
-        if(result>0) {
+        if (result > 0) {
             return ResultVO.success(null);
-        }
-        else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/getBlockStatus")
-    public ResultVO getUserBlockStatus(Integer userId){
+    public ResultVO getUserBlockStatus(Integer userId) {
         Users users = usersService.getUsersById(userId);
 
-        if(users != null){
+        if (users != null) {
             Integer isBlock = users.getIsBlock();
             return ResultVO.success(isBlock);
-        }else{
+        } else {
             return ResultVO.failed();
         }
     }
 
     @RequestMapping("/getById")
-    public ResultVO getById(Integer userId){
+    public ResultVO getById(Integer userId) {
         return ResultVO.success(usersService.getUsersById(userId));
     }
 
     @RequestMapping("/underCreditLevelAndBlock")
-    public ResultVO underCreditLevelAndBlock(Integer userId){
-        int result = usersService.updateCreditLevelAndBlock(userId,-1);
-        if(result>0){
+    public ResultVO underCreditLevelAndBlock(Integer userId) {
+        int result = usersService.updateCreditLevelAndBlock(userId, -1);
+        if (result > 0) {
             return ResultVO.success(null);
-        }else{
+        } else {
             return ResultVO.failed();
         }
     }

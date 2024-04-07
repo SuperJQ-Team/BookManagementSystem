@@ -9,7 +9,10 @@ public interface IOrderService extends IService<Order> {
     List<Order> get(Order order);
 
     int add(Order order);
+
     int delete(Integer id);
+
     int update(Order order);
+
     int examine(Integer id, Integer allow);
 }

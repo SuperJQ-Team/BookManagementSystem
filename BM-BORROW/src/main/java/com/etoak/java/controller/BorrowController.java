@@ -16,27 +16,27 @@ public class BorrowController {
     private IUserServiceFeign userServiceFeign;
 
     @RequestMapping("/book")
-    public ResultVO borrowBook(Integer userId, String bookNo){
+    public ResultVO borrowBook(Integer userId, String bookNo) {
 
         int request = borrowService.borrowBook(userId, bookNo);
-        if(request == 200){
+        if (request == 200) {
             return ResultVO.success(null);
-        }else{
+        } else {
             return ResultVO.failed(String.valueOf(request));
         }
     }
 
     @RequestMapping("/getById")
-    public ResultVO getUserById(Integer id){
+    public ResultVO getUserById(Integer id) {
         return userServiceFeign.getUserById(id);
     }
 
     @RequestMapping("/back")
-    public ResultVO backBook(Integer bookNo){
+    public ResultVO backBook(Integer bookNo) {
         int result = borrowService.backBook(bookNo);
-        if(result == 200){
+        if (result == 200) {
             return ResultVO.success(null);
-        }else{
+        } else {
             return ResultVO.failed(String.valueOf(result));
         }
     }

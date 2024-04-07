@@ -12,16 +12,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-/**
- * @author Bromine
- */
+
 @TableName(value = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @TableField(value = "name")

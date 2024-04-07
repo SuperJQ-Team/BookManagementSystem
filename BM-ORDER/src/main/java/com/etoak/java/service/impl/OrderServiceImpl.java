@@ -30,26 +30,26 @@ public class OrderServiceImpl
     public List<Order> get(Order order) {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
 
-        if(order.getOrderNo() != null && !"".equals(order.getOrderNo())){
+        if (order.getOrderNo() != null && !"".equals(order.getOrderNo())) {
             wrapper.like("order_no", order.getOrderNo());
         }
-        if(order.getBookName() != null && !"".equals(order.getBookName())){
+        if (order.getBookName() != null && !"".equals(order.getBookName())) {
             wrapper.like("book_name", order.getBookName());
         }
-        if(order.getCreateUser() != null && !"".equals(order.getCreateUser())){
+        if (order.getCreateUser() != null && !"".equals(order.getCreateUser())) {
             wrapper.like("create_user", order.getCreateUser());
         }
-        if(order.getPublisher() != null && !"".equals(order.getPublisher())){
+        if (order.getPublisher() != null && !"".equals(order.getPublisher())) {
             wrapper.like("publisher", order.getPublisher());
         }
-        if(order.getAuthor() != null && !"".equals(order.getAuthor())){
+        if (order.getAuthor() != null && !"".equals(order.getAuthor())) {
             wrapper.like("author", order.getAuthor());
         }
 
-        if(order.getBookLabel() != null && !"".equals(order.getBookLabel())){
+        if (order.getBookLabel() != null && !"".equals(order.getBookLabel())) {
             String[] labels = order.getBookLabel().split(",");
-            for(String s : labels){
-                if(!"".equals(s)) {
+            for (String s : labels) {
+                if (!"".equals(s)) {
                     wrapper.like("book_label", s);
                 }
             }
@@ -66,7 +66,7 @@ public class OrderServiceImpl
 
     @Override
     public int delete(Integer id) {
-        if(id == null){
+        if (id == null) {
             return 0;
         }
         return orderMapper.deleteById(id);
@@ -78,12 +78,12 @@ public class OrderServiceImpl
     }
 
     @Override
-    public int examine(Integer id, Integer allow){
-        if(id == null || allow == null){
+    public int examine(Integer id, Integer allow) {
+        if (id == null || allow == null) {
             return 400;
         }
         Order order = orderMapper.selectById(id);
-        if (order == null){
+        if (order == null) {
             return 450;
         }
 
@@ -91,8 +91,7 @@ public class OrderServiceImpl
             /* 未通过 */
             order.setApprovalTime(null);
             order.setStatus(0);
-        }
-        else if (allow == 1) {
+        } else if (allow == 1) {
             /* 已通过 */
             order.setApprovalTime(new Date());
             order.setStatus(1);
@@ -109,12 +108,12 @@ public class OrderServiceImpl
             Random rand = new Random();
             int MAX = 9999, MIN = 1;
 
-            if(order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
+            if (order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
                 /* 在booknumber为null或《=0时设为1 */
                 order.setBookNumbers(1);
             }
 
-            for(int i=0;i<order.getBookNumbers();++i){
+            for (int i = 0; i < order.getBookNumbers(); ++i) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
                 String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
 
@@ -128,17 +127,15 @@ public class OrderServiceImpl
                 bookServiceFeign.addBook(params);
             }
 
-        }
-        else if (allow == 2) {
+        } else if (allow == 2) {
             /* 已驳回 */
             order.setApprovalTime(new Date());
             order.setStatus(2);
         }
-        int result =  orderMapper.updateById(order);
-        if (result > 0){
+        int result = orderMapper.updateById(order);
+        if (result > 0) {
             return 200;
-        }
-        else{
+        } else {
             return 470;
         }
     }

@@ -14,52 +14,53 @@ import java.util.List;
 public class OrderController {
     @Autowired
     OrderServiceImpl orderService;
+
     @RequestMapping("/add")
-    public ResultVO add(Order order){
+    public ResultVO add(Order order) {
         int request = orderService.add(order);
-        if(request > 0){
+        if (request > 0) {
             return ResultVO.success(null);
-        }else{
+        } else {
             return ResultVO.failed(null);
         }
     }
 
     @RequestMapping("/delete")
-    public ResultVO delete(Integer id){
+    public ResultVO delete(Integer id) {
         int request = orderService.delete(id);
-        if(request > 0){
+        if (request > 0) {
             return ResultVO.success(null);
-        }else{
+        } else {
             return ResultVO.failed(null);
         }
     }
 
     @RequestMapping("/update")
-    public ResultVO update(Order order){
+    public ResultVO update(Order order) {
         int request = orderService.update(order);
-        if(request > 0){
+        if (request > 0) {
             return ResultVO.success(null);
-        }else{
+        } else {
             return ResultVO.failed(String.valueOf(request));
         }
     }
 
     @RequestMapping("/list")
-    public ResultVO list(Order order){
+    public ResultVO list(Order order) {
         List<Order> request = orderService.get(order);
-        if(!request.isEmpty()){
+        if (!request.isEmpty()) {
             return ResultVO.success(request);
-        }else{
+        } else {
             return ResultVO.failed(null);
         }
     }
 
     @RequestMapping("/examine")
-    public ResultVO examine(Integer id, Integer allow){
+    public ResultVO examine(Integer id, Integer allow) {
         int request = orderService.examine(id, allow);
-        if(request == 200){
+        if (request == 200) {
             return ResultVO.success(null);
-        }else{
+        } else {
             return ResultVO.failed(String.valueOf(request));
         }
     }

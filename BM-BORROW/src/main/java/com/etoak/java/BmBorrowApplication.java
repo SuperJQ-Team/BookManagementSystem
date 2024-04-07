@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @SpringBootApplication
 public class BmBorrowApplication {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(BmBorrowApplication.class);
     }
 }
