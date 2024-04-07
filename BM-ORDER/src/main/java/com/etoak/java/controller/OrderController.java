@@ -4,12 +4,12 @@ import com.etoak.java.entity.Order;
 import com.etoak.java.service.impl.OrderServiceImpl;
 import com.etoak.java.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
     @Autowired
