@@ -17,7 +17,7 @@ public class BorrowController {
 
     @RequestMapping("/book")
     public ResultVO borrowBook(Integer userId, String bookNo){
-        System.out.println(bookNo);
+
         int request = borrowService.borrowBook(userId, bookNo);
         if(request == 200){
             return ResultVO.success(null);
