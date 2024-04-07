@@ -11,7 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@TableName(value = "order")
+@TableName(value = "orders")
 @Data
 
 public class Order {
