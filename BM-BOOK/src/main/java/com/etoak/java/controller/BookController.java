@@ -4,6 +4,7 @@ import com.etoak.java.entity.Book;
 import com.etoak.java.service.Impl.BookServiceImpl;
 import com.etoak.java.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,8 +16,9 @@ public class BookController {
     @Autowired
     private BookServiceImpl bookService;
 
-    @RequestMapping("/add")
+    @GetMapping("/add")
     public ResultVO addBook(Book book){
+        System.out.println(book);
         int result = bookService.addBook(book);
         if(result>0) {
             return ResultVO.success(null);

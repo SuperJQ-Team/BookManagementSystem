@@ -1,5 +1,6 @@
 package com.etoak.java.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.etoak.java.entity.Book;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -95,8 +97,10 @@ public class OrderServiceImpl
             order.setApprovalTime(new Date());
             order.setStatus(1);
 
+            System.out.println(order);
+
             Book book = new Book();
-            book.setBookLabel(order.getBookName());
+            book.setBookName(order.getBookName());
             book.setBookLabel(order.getBookLabel());
             book.setAuthor(order.getAuthor());
             book.setPublisher(order.getPublisher());
@@ -105,17 +109,23 @@ public class OrderServiceImpl
             Random rand = new Random();
             int MAX = 9999, MIN = 1;
 
-            if(order.getBookNumbers() != null){
-                for(int i=0;i<order.getBookNumbers();++i){
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-                    String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
-
-                    book.setBookNo(book_no);
-                    bookServiceFeign.addBook(book);
-                }
+            if(order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
+                /* 在booknumber为null或《=0时设为1 */
+                order.setBookNumbers(1);
             }
-            else{
-                return 460;
+
+            for(int i=0;i<order.getBookNumbers();++i){
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
+
+                book.setBookNo(book_no);
+                System.out.println(book);
+                // 实体类转json字符串 需要引入fastjson依赖
+                String jsonString = JSON.toJSONString(book);
+                // json字符串转map
+                Map params = JSON.parseObject(jsonString, Map.class);
+
+                bookServiceFeign.addBook(params);
             }
 
         }
