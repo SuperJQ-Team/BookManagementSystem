@@ -61,6 +61,7 @@ public class OrderServiceImpl
     @Override
     public int add(Order order) {
         order.setCreateTime(new Date());
+        order.setStatus(0);
         return orderMapper.insert(order);
     }
 
@@ -87,52 +88,52 @@ public class OrderServiceImpl
             return 450;
         }
 
-        if (allow == 0) {
-            /* 未通过 */
-            order.setApprovalTime(null);
-            order.setStatus(0);
-        }
-        else if (allow == 1) {
-            /* 已通过 */
-            order.setApprovalTime(new Date());
-            order.setStatus(1);
+        if(order.getStatus() == 0)
+        {
+            if (allow == 1) {
+                /* 已通过 */
+                order.setApprovalTime(new Date());
+                order.setStatus(1);
 
-            System.out.println(order);
+                System.out.println(order);
 
-            Book book = new Book();
-            book.setBookName(order.getBookName());
-            book.setBookLabel(order.getBookLabel());
-            book.setAuthor(order.getAuthor());
-            book.setPublisher(order.getPublisher());
-            book.setPublishTime(order.getPublishTime());
+                Book book = new Book();
+                book.setBookName(order.getBookName());
+                book.setBookLabel(order.getBookLabel());
+                book.setAuthor(order.getAuthor());
+                book.setPublisher(order.getPublisher());
+                book.setPublishTime(order.getPublishTime());
 
-            Random rand = new Random();
-            int MAX = 9999, MIN = 1;
+                Random rand = new Random();
+                int MAX = 9999, MIN = 1;
 
-            if(order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
-                /* 在booknumber为null或《=0时设为1 */
-                order.setBookNumbers(1);
+                if (order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
+                    /* 在booknumber为null或《=0时设为1 */
+                    order.setBookNumbers(1);
+                }
+
+                for (int i = 0; i < order.getBookNumbers(); ++i) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                    String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
+
+                    book.setBookNo(book_no);
+                    System.out.println(book);
+                    // 实体类转json字符串 需要引入fastjson依赖
+                    String jsonString = JSON.toJSONString(book);
+                    // json字符串转map
+                    Map params = JSON.parseObject(jsonString, Map.class);
+
+                    bookServiceFeign.addBook(params);
+                }
             }
-
-            for(int i=0;i<order.getBookNumbers();++i){
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-                String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
-
-                book.setBookNo(book_no);
-                System.out.println(book);
-                // 实体类转json字符串 需要引入fastjson依赖
-                String jsonString = JSON.toJSONString(book);
-                // json字符串转map
-                Map params = JSON.parseObject(jsonString, Map.class);
-
-                bookServiceFeign.addBook(params);
+            else if (allow == 2) {
+                /* 已驳回 */
+                order.setApprovalTime(new Date());
+                order.setStatus(2);
             }
-
         }
-        else if (allow == 2) {
-            /* 已驳回 */
-            order.setApprovalTime(new Date());
-            order.setStatus(2);
+        else{
+            return 460;
         }
         int result =  orderMapper.updateById(order);
         if (result > 0){
