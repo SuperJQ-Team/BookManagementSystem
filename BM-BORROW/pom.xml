@@ -12,6 +12,10 @@
     <artifactId>BM-BORROW</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId> org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!-- mybatis-plus 依赖 -->
         <dependency>
             <groupId>com.baomidou</groupId>

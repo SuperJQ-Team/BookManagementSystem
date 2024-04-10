@@ -27,7 +27,7 @@ public class OrderServiceImpl
     @Autowired
     IBookServiceFeign bookServiceFeign;
 
-    @Value("${order.no.prefix}")
+    @Value("${order.nos.prefix}")
     String orderBefore;
 
     @Override
