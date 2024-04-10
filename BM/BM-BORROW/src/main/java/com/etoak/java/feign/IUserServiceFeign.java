@@ -19,5 +19,5 @@ public interface IUserServiceFeign {
     ResultVO getBlockStatusById(@RequestParam(value = "userId") Integer userId);
 
     @RequestMapping("/updateUserCreditLevel")
-    ResultVO updateUserCreditLevel(@Param(value = "userId")Integer userId,@Param(value = "changeLevel")Integer changeLevel);
+    ResultVO updateUserCreditLevel(@RequestParam(value = "userId")Integer userId,@RequestParam(value = "changeLevel")Integer changeLevel);
 }

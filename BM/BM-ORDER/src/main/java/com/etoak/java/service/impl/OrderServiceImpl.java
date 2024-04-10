@@ -1,5 +1,6 @@
 package com.etoak.java.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.etoak.java.entity.Book;
@@ -8,11 +9,13 @@ import com.etoak.java.feign.IBookServiceFeign;
 import com.etoak.java.mapper.OrderMapper;
 import com.etoak.java.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -23,7 +26,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Autowired
     IBookServiceFeign bookServiceFeign;
 
-    @Value("${orders.no.prefix}")
+    @Value("${order.nos.prefix}")
     String orderBefore;
 
     @Override
@@ -117,7 +120,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                     String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
 
                     book.setBookNo(book_no);
-                    bookServiceFeign.addBook(book);
+                    // 实体类转json字符串 需要引入fastjson依赖
+                    String jsonString = JSON.toJSONString(book);
+                    // json字符串转map
+                    Map params = JSON.parseObject(jsonString, Map.class);
+
+                    bookServiceFeign.addBook(params);
                 }
             }
             else{

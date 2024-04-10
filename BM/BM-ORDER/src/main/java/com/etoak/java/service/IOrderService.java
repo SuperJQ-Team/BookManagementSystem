@@ -12,4 +12,5 @@ public interface IOrderService extends IService<Order> {
     int delete(Integer id);
     int update(Order order);
     int examine(Integer id, Integer allow);
+    Integer getSumPrice(String publisher);
 }
