@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class OrderServiceImpl
@@ -25,6 +26,9 @@ public class OrderServiceImpl
     OrderMapper orderMapper;
     @Autowired
     IBookServiceFeign bookServiceFeign;
+
+    @Value("${orders.no.prefix}")
+    String orderBefore;
 
     @Override
     public List<Order> get(Order order) {
@@ -61,6 +65,10 @@ public class OrderServiceImpl
     @Override
     public int add(Order order) {
         order.setCreateTime(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String order_no = orderBefore + sdf.format(new Date());
+
+        order.setOrderNo(order_no);
         return orderMapper.insert(order);
     }
 
@@ -142,5 +150,10 @@ public class OrderServiceImpl
             return 470;
         }
     }
+    @Override
+    public Integer getSumPrice(String publisher) {
+        return orderMapper.getSumPrice(publisher);
+    }
+
 
 }

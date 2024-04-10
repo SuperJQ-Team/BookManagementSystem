@@ -1,14 +1,13 @@
+# 配置端口号
 #server:
-  #port: 8082
-  # 添加数据源
+#  port: 8081
 spring:
-  #datasource:
-    #url: jdbc:mysql://localhost:3306/bm-order
-    #driver-class-name: com.alibaba.druid.proxy.DruidDriver
-    #username: root
-    #password: Zzz116540503
+#  datasource:
+ #     url: jdbc:mysql://localhost:3306/bm-book
+  #    username: commander
+   #   password: 123456
   application:
-    name: BM-ORDER-SERVICE
+    name: BM-BOOK-SERVICE
   profiles:
     active: dev
   cloud:
@@ -27,6 +26,9 @@ spring:
         #文件的扩展名
         file-extension: yml
         group: bm
-        order:
-          no:
-            prefix: ERROR
+
+
+logging:
+  level:
+    java.com.etoak.java.service.impl: debug
+    java.com.etoak.java.feign: debug

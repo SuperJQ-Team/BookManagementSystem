@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: BM-GATEWAY-SERVICE
+    cloud:
+      nacos:
+        discovery:
+          server-addr: 127.0.0.1:8848
+          username: nacos
+          password: nacos
+          namespace: public
+      gateway:
+        #路由规则
+        routes:
+          #路由的唯一标识符
+          - id: user_route
+            uri: lb://BM-USER-SERVICE
+            #断言规则
+            predicates:
+              - Path=/user-serv/**
+            filters:
+              - StripPrefix=1
