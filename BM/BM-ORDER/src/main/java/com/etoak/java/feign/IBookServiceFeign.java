@@ -4,12 +4,11 @@ import com.etoak.java.entity.Book;
 import com.etoak.java.vo.ResultVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
+@FeignClient(value="BM-BOOK-SERVICE")
 
-@FeignClient(value = "BM-BOOK-SERVICE")
 public interface IBookServiceFeign {
     @RequestMapping("/book/add")
-    ResultVO addBook(@RequestParam("book") Map book);
+    ResultVO addBook(Book book);
+
 }
