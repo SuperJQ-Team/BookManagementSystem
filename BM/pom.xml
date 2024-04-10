@@ -19,7 +19,6 @@
         <module>BM-ORDER</module>
         <module>BM-BORROW</module>
         <module>BM-BOOK-EX</module>
-        <module>BM-GATEWAY</module>
     </modules>
 
     <properties>
@@ -71,6 +70,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!--<version>自己想要的版本</version>-->
+        </dependency>
         <!-- lombok 实体类 减少写的实体类的代码 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

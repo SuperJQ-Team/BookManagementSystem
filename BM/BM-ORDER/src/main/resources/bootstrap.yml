@@ -27,6 +27,3 @@ spring:
         #文件的扩展名
         file-extension: yml
         group: bm
-        order:
-          no:
-            prefix: ERROR
