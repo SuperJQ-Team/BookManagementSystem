@@ -9,6 +9,7 @@ import com.etoak.java.feign.IBookServiceFeign;
 import com.etoak.java.mapper.OrderMapper;
 import com.etoak.java.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,9 @@ public class OrderServiceImpl
     OrderMapper orderMapper;
     @Autowired
     IBookServiceFeign bookServiceFeign;
+
+    @Value("${order.nos.prefix}")
+    String orderBefore;
 
     @Override
     public List<Order> get(Order order) {
@@ -62,6 +66,11 @@ public class OrderServiceImpl
     public int add(Order order) {
         order.setCreateTime(new Date());
         order.setStatus(0);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String order_no = orderBefore + sdf.format(new Date());
+
+        order.setOrderNo(order_no);
         return orderMapper.insert(order);
     }
 
@@ -142,6 +151,11 @@ public class OrderServiceImpl
         else{
             return 470;
         }
+    }
+
+    @Override
+    public Integer getSumPrice(String publisher) {
+        return orderMapper.getSumPrice(publisher);
     }
 
 }

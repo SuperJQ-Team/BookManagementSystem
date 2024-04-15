@@ -64,4 +64,14 @@ public class OrderController {
             return ResultVO.failed(String.valueOf(request));
         }
     }
+
+    @RequestMapping("/getSumPrice")
+    public ResultVO getSumPrice(String publisher){
+        Integer request = orderService.getSumPrice(publisher);
+        if(request != null){
+            return ResultVO.success(request);
+        }else{
+            return ResultVO.failed(null);
+        }
+    }
 }

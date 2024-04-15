@@ -19,6 +19,7 @@
         <module>BM-ORDER</module>
         <module>BM-BOOK</module>
         <module>BM-BORROW</module>
+        <module>BM-GATWAY</module>
     </modules>
     <dependencyManagement>
         <dependencies>
