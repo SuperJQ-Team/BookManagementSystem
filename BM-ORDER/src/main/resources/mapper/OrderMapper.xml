@@ -2,7 +2,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.etoak.java.mapper.OrderMapper">
     <select id="getSumPrice" parameterType="java.lang.String" resultType="java.lang.Integer">
-        select sum(totalPrice)
+        select sum(total_price)
         from `bm-order`.`orders`
         <if test="publisher != null">
             where publisher = #{publisher}

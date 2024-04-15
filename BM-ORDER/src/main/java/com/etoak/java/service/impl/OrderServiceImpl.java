@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -69,6 +70,13 @@ public class OrderServiceImpl
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String order_no = orderBefore + sdf.format(new Date());
+
+        if(order.getTotalPrice() == null){
+            order.setTotalPrice(BigDecimal.ZERO);
+        }
+        if(order.getBookNumbers() == null){
+            order.setBookNumbers(1);
+        }
 
         order.setOrderNo(order_no);
         return orderMapper.insert(order);
