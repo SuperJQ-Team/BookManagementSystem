@@ -1,12 +1,14 @@
 package com.etoak.java.controller;
 
 import com.etoak.java.entity.Order;
+import com.etoak.java.entity.PublisherAndPrice;
 import com.etoak.java.service.impl.OrderServiceImpl;
 import com.etoak.java.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -66,11 +68,22 @@ public class OrderController {
 
     @RequestMapping("/getSumPrice")
     public ResultVO getSumPrice(String publisher){
-        Integer request = orderService.getSumPrice(publisher);
-        if(request != null){
-            return ResultVO.success(request);
-        }else{
-            return ResultVO.failed(null);
+        if(publisher != null) {
+            BigDecimal request = orderService.getPublisherPrice(publisher);
+            if(request != null){
+                return ResultVO.success(request);
+            }else{
+                return ResultVO.failed(null);
+            }
         }
+        else {
+            List<PublisherAndPrice> request = orderService.getSumPrice();
+            if(request != null){
+                return ResultVO.success(request);
+            }else{
+                return ResultVO.failed(null);
+            }
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.etoak.java.entity.Book;
 import com.etoak.java.entity.Order;
+import com.etoak.java.entity.PublisherAndPrice;
 import com.etoak.java.feign.IBookServiceFeign;
 import com.etoak.java.mapper.OrderMapper;
 import com.etoak.java.service.IOrderService;
@@ -135,7 +136,6 @@ public class OrderServiceImpl
 
                     book.setBookNo(book_no);
                     System.out.println(book);
-                    // 实体类转json字符串 需要引入fastjson依赖
                     String jsonString = JSON.toJSONString(book);
                     // json字符串转map
                     Map params = JSON.parseObject(jsonString, Map.class);
@@ -162,8 +162,11 @@ public class OrderServiceImpl
     }
 
     @Override
-    public Integer getSumPrice(String publisher) {
-        return orderMapper.getSumPrice(publisher);
+    public BigDecimal getPublisherPrice(String publisher) {
+        return orderMapper.getPublisherPrice(publisher);
     }
+
+    @Override
+    public List<PublisherAndPrice> getSumPrice() {return orderMapper.getSumPrice(); }
 
 }
