@@ -36,6 +36,9 @@ public class OrderServiceImpl
     public List<Order> get(Order order) {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
 
+        if(order.getId() != null){
+            wrapper.eq("id", order.getId());
+        }
         if(order.getOrderNo() != null && !"".equals(order.getOrderNo())){
             wrapper.like("order_no", order.getOrderNo());
         }

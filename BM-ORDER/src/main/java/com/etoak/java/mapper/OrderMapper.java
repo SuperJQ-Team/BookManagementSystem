@@ -12,6 +12,5 @@ import java.util.List;
 @Mapper
 public interface OrderMapper extends BaseMapper<Order> {
     BigDecimal getPublisherPrice(@Param(value = "publisher")String publisher);
-
     List<PublisherAndPrice> getSumPrice();
 }
