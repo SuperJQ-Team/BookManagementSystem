@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PreBook {
+public class Prebook {
     @TableId(value = "id", type = IdType.AUTO)
     int id;
 
