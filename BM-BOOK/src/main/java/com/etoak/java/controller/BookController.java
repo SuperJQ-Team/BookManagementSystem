@@ -1,6 +1,7 @@
 package com.etoak.java.controller;
 
 import com.etoak.java.entity.Book;
+import com.etoak.java.entity.Order;
 import com.etoak.java.service.Impl.BookServiceImpl;
 import com.etoak.java.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,17 @@ public class BookController {
         Book result = bookService.getBookByNo(no);
         if(result != null) {
             return ResultVO.success(result.getStatus());
+        }
+        else{
+            return ResultVO.failed();
+        }
+    }
+
+    @GetMapping("/addByOrder")
+    public ResultVO getById(Order order){
+        int result = bookService.addByOrder(order);
+        if(result > 1) {
+            return ResultVO.success(result);
         }
         else{
             return ResultVO.failed();

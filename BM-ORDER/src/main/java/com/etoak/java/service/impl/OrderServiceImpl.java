@@ -118,33 +118,18 @@ public class OrderServiceImpl
 
                 System.out.println(order);
 
-                Book book = new Book();
-                book.setBookName(order.getBookName());
-                book.setBookLabel(order.getBookLabel());
-                book.setAuthor(order.getAuthor());
-                book.setPublisher(order.getPublisher());
-                book.setPublishTime(order.getPublishTime());
-
-                Random rand = new Random();
-                int MAX = 9999, MIN = 1;
 
                 if (order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
                     /* 在booknumber为null或《=0时设为1 */
                     order.setBookNumbers(1);
                 }
 
-                for (int i = 0; i < order.getBookNumbers(); ++i) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-                    String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
 
-                    book.setBookNo(book_no);
-                    System.out.println(book);
-                    String jsonString = JSON.toJSONString(book);
-                    // json字符串转map
-                    Map params = JSON.parseObject(jsonString, Map.class);
+                String jsonString = JSON.toJSONStringWithDateFormat(order, "yyyy-MM-dd HH:mm:ss");
+                Map params = JSON.parseObject(jsonString, Map.class);
 
-                    bookServiceFeign.addBook(params);
-                }
+                bookServiceFeign.addBooks(params);
+
             }
             else if (allow == 2) {
                 /* 已驳回 */

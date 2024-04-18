@@ -20,6 +20,7 @@
         <module>BM-BOOK</module>
         <module>BM-BORROW</module>
         <module>BM-GATWAY</module>
+        <module>BM-PREBOOK</module>
     </modules>
     <dependencyManagement>
         <dependencies>
