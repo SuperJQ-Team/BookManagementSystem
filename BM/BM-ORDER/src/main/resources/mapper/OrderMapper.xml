@@ -3,8 +3,8 @@
 <mapper namespace="com.etoak.java.mapper.OrderMapper">
 
     <select id="getSumPrice" parameterType="java.lang.String" resultType="java.lang.Integer">
-        select sum(totalPrice)
-        from `bm-order`.`orders`
+        select sum(total_price)
+        from `BM-ORDER`.`orders`
         <if test="publisher != null">
             where publisher = #{publisher}
         </if>
