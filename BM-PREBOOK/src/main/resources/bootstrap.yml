@@ -25,3 +25,4 @@ spring:
         enabled: true
         file-extension: yml
         group: bm
+

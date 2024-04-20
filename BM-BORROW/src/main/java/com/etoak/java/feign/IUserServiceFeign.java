@@ -5,10 +5,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient(value = "bm-user-service")
+@RequestMapping("/users")
 public interface IUserServiceFeign {
-    @RequestMapping("/users/getById")
+    @RequestMapping("/getById")
     ResultVO getUserById(Integer id);
 
-    @RequestMapping("/users/underCreditLevelAndBlock")
+    @RequestMapping("/underCreditLevelAndBlock")
     ResultVO underCreditLevelAndBlock(Integer userId);
 }

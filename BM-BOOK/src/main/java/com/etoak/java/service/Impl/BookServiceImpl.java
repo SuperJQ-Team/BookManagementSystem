@@ -116,4 +116,11 @@ public class BookServiceImpl
 
         return bookMapper.addBooks(books);
     }
+
+    @Override
+    public List getBooksCount(List<String> booksName) {
+        return bookMapper.getBooksCount(booksName);
+    }
+
+
 }

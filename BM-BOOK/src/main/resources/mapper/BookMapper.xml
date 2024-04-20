@@ -14,4 +14,10 @@
         </foreach>
         ;
     </insert>
+    <select id="getBooksCount">
+        <foreach collection="booksName" item="bookName" separator=" UNION ALL ">
+            select count(*) from `bm-book`.book where book_name = #{bookName}
+        </foreach>
+            ;
+    </select>
 </mapper>

@@ -10,13 +10,16 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@TableName("pre-book")
+@TableName("pre_book")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Prebook {
     @TableId(value = "id", type = IdType.AUTO)
-    int id;
+    Integer id;
+
+    @TableField(value = "person_name")
+    String personName;
 
     @TableField(value = "book_name")
     String bookName;

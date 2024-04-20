@@ -20,4 +20,6 @@ public interface IBookService extends IService<Book>{
     Book getBookByNo(String bookNo);
 
     int addByOrder(Order order);
+
+    List getBooksCount(List<String> booksName);
 }
