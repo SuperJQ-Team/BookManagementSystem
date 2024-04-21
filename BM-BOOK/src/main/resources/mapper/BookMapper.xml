@@ -14,10 +14,19 @@
         </foreach>
         ;
     </insert>
-    <select id="getBooksCount">
+    <select id="getBooksCount_Deprecated">
         <foreach collection="booksName" item="bookName" separator=" UNION ALL ">
             select count(*) from `bm-book`.book where book_name = #{bookName}
         </foreach>
             ;
+    </select>
+
+    <select id="getBooksCount">
+        select book_name, count(*) as count from `bm-book`.book
+        where book_name in (
+            <foreach collection="booksName" item="bookName" separator=", ">
+                #{bookName}
+            </foreach>
+        ) group by book_name
     </select>
 </mapper>

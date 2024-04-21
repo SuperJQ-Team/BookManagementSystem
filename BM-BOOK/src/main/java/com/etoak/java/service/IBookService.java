@@ -5,6 +5,7 @@ import com.etoak.java.entity.Book;
 import com.etoak.java.entity.Order;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IBookService extends IService<Book>{
     int addBook(Book book);
@@ -21,5 +22,5 @@ public interface IBookService extends IService<Book>{
 
     int addByOrder(Order order);
 
-    List getBooksCount(List<String> booksName);
+    Map getBooksCount(List<String> booksName);
 }

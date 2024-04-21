@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/book")
@@ -97,7 +98,8 @@ public class BookController {
     @RequestMapping("/getBooksCountByName")
     public ResultVO getBooksCount(@RequestBody List<String> bookNames){
         System.out.println(bookNames);
-        List result = bookService.getBooksCount(bookNames);
+        Map result = bookService.getBooksCount(bookNames);
+        System.out.println(result);
         if(result != null) {
             return ResultVO.success(result);
         }else{

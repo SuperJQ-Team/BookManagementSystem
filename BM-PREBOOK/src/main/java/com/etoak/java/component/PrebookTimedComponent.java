@@ -30,26 +30,25 @@ public class PrebookTimedComponent {
         }
 
         System.out.println(prebookNames);
-        ResultVO<List<Integer>> bookResultObj = bookServiceFeign.getBooksCount(prebookNames);
-        List<Integer> bookCounts = bookResultObj.getData();
+        ResultVO<Map<String, Integer>> bookResultObj = bookServiceFeign.getBooksCount(prebookNames);
+        Map<String, Integer> bookCounts = bookResultObj.getData();
 
         System.out.println(bookCounts);
 
         Map<String, Set<String>> emailBooks = new HashMap<>();
         Map<String, String> emailName = new HashMap<>();
 
-        for(int i = 0; i < bookCounts.size(); ++i){
-            if(bookCounts.get(i) > 0){
-                /*由统计某个邮箱地址的书*/
-                String email = prebooks.get(i).getEmail();
-                String bookName = prebooks.get(i).getBookName();
-                String personName = prebooks.get(i).getPersonName();
+        for (Prebook prebook : prebooks) {
+            /*由统计某个邮箱地址的书*/
+            String email = prebook.getEmail();
+            String bookName = prebook.getBookName();
+            String personName = prebook.getPersonName();
 
-                if(!emailBooks.containsKey(email)){
+            if(bookCounts.get(bookName) > 0){
+                if (!emailBooks.containsKey(email)) {
                     emailBooks.put(email, new HashSet<>());
                     emailName.put(email, personName);
                 }
-
                 emailBooks.get(email).add(bookName);
             }
         }
@@ -59,7 +58,7 @@ public class PrebookTimedComponent {
             Set<String> books = emailBooks.get(email);
             String name = emailName.get(email);
             StringBuilder content = new StringBuilder();
-            if(name != null && "".equals(name)){
+            if("".equals(name)){
                 content.append(String.format("尊敬的 %s 先生/女士！\n", name));
             }else{
                 content.append("尊敬的匿名用户！");

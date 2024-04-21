@@ -118,8 +118,14 @@ public class BookServiceImpl
     }
 
     @Override
-    public List getBooksCount(List<String> booksName) {
-        return bookMapper.getBooksCount(booksName);
+    public Map getBooksCount(List<String> booksName) {
+        List<Map<String, Object>> coms = bookMapper.getBooksCount(booksName);
+
+        Map<String, Integer> map = new HashMap<>();
+        for(Map<String, Object> com : coms){
+            map.put((String) com.get("book_name"), Math.toIntExact((Long) com.get("count")));
+        }
+        return map;
     }
 
 

@@ -11,5 +11,5 @@ import java.util.Map;
 @FeignClient(value = "bm-book-service")
 public interface IBookServiceFeign {
     @RequestMapping("/book/getBooksCountByName")
-    ResultVO<List<Integer>> getBooksCount(ArrayList<String> BookNames);
+    ResultVO<Map<String, Integer>> getBooksCount(ArrayList<String> BookNames);
 }
