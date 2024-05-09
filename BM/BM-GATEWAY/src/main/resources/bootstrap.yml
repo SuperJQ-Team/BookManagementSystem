@@ -1,32 +1,58 @@
 # 配置端口号
-server:
-  port: 8080
+#server:
+#  port: 8090
 spring:
   #  datasource:
   #    url: jdbc:mysql://localhost:3306/nacos
   #    username:
   #    password:
   #    type: com.alibaba.druid.pool.DruidDataSource
+  main:
+    web-application-type: reactive
   application:
-    name: bm-gateway-service
-  #  profiles:
-  #    active: dev
+    name: BM-GATEWAY-SERVICE
+  profiles:
+    active: dev
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-
         username: nacos
         password: nacos
         namespace: public
-
+      config:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        #是否开启配置中心 默认true
+        enabled: true
+        #文件的扩展名
+        file-extension: yml
+        group: bm
     gateway:
 
       routes:
         - id: user_route
-          uri: lb://bm-user-service
+          uri: lb://BM-USER-SERVICE
 
           predicates:
             - Path=/user-serv/**
+          filters:
+            - StripPrefix=1
+
+        - id: book_route
+          uri: lb://BM-BOOK-SERVICE
+
+          predicates:
+            - Path=/book-serv/**
+          filters:
+            - StripPrefix=1
+
+        - id: borrow_route
+          uri: lb://BM-BORROW-SERVICE
+
+          predicates:
+            - Path=/borrow-serv/**
+          #  - Before=2024-05-09T00:00:00+08:00[Asia/Shanghai]
           filters:
             - StripPrefix=1
