@@ -1,8 +1,11 @@
 # 配置端口号
 server:
   port: 8080
+
 spring:
-#  datasource:
+  main:
+    web-application-type: reactive
+  #  datasource:
 #    url: jdbc:mysql://localhost:3306/nacos
 #    username: commander
 #    password: 123456
@@ -15,7 +18,6 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-
         username: nacos
         password: nacos
         namespace: public
@@ -28,5 +30,38 @@ spring:
 
           predicates:
             - Path=/user-serv/**
+          filters:
+            - StripPrefix=1
+            - RewritePath=/user-serv/?(?<segment>.*),/users/$\{segment}
+
+        - id: book_route
+          uri: lb://bm-book-service/book
+
+          predicates:
+            - Path=/book-serv/**
+          filters:
+            - StripPrefix=1
+
+        - id: order_route
+          uri: lb://bm-order-service/order
+
+          predicates:
+            - Path=/order-serv/**
+          filters:
+            - StripPrefix=1
+
+        - id: borrow_route
+          uri: lb://bm-borrow-service/borrow
+
+          predicates:
+            - Path=/borrow-serv/**
+          filters:
+            - StripPrefix=1
+
+        - id: pre_book_route
+          uri: lb://bm-pre-book-service
+
+          predicates:
+            - Path=/pre-book-serv/**
           filters:
             - StripPrefix=1
