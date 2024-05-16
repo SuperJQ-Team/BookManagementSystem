@@ -22,10 +22,10 @@ public class MyGlobalFilter implements GlobalFilter {
         String token = request.getHeaders().getFirst("token");
         System.out.println("请求头中携带的token:"+token);
 
-        if(token == null || "".equals(token)){
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
-        }
+//        if(token == null || "".equals(token)){
+//            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//            return exchange.getResponse().setComplete();
+//        }
 
         return chain.filter(exchange);
     }
