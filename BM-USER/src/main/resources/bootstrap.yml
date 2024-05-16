@@ -26,3 +26,6 @@ spring:
         enabled: true
         file-extension: yml
         group: bm
+    sentinel:
+      transport:
+        dashboard: localhost:8080
