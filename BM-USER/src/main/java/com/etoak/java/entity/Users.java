@@ -59,4 +59,7 @@ public class Users {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    @TableField(value = "score")
+    private int score;
+
 }
