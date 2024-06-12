@@ -4,6 +4,7 @@ import com.etoak.java.entity.Book;
 import com.etoak.java.entity.Order;
 import com.etoak.java.service.Impl.BookServiceImpl;
 import com.etoak.java.vo.ResultVO;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,8 +86,19 @@ public class BookController {
     }
 
     @GetMapping("/addByOrder")
-    public ResultVO getById(Order order){
+    public ResultVO addByOrder(Order order){
         int result = bookService.addByOrder(order);
+        if(result > 1) {
+            return ResultVO.success(result);
+        }
+        else{
+            return ResultVO.failed();
+        }
+    }
+
+    @GetMapping("/addByDonate")
+    public ResultVO addByDonate(Book donate){
+        int result = bookService.addBook(donate);
         if(result > 1) {
             return ResultVO.success(result);
         }
@@ -103,6 +115,17 @@ public class BookController {
         if(result != null) {
             return ResultVO.success(result);
         }else{
+            return ResultVO.failed();
+        }
+    }
+
+    @GetMapping("/getByNoReturnScore")
+    public ResultVO addByDonate(String no){
+        Integer score = bookService.getScoreWithNo(no);
+        if(score != null) {
+            return ResultVO.success(score);
+        }
+        else{
             return ResultVO.failed();
         }
     }

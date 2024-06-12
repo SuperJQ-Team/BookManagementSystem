@@ -128,5 +128,20 @@ public class BookServiceImpl
         return map;
     }
 
+    @Override
+    public Integer getScoreWithNo(String no) {
+        QueryWrapper<Book> wrapper = new QueryWrapper<>();
+        wrapper.eq("book_no", no);
+
+        Book book = bookMapper.selectOne(wrapper);
+
+        if(book == null){
+            return null;
+        }
+        else{
+            return book.getScore();
+        }
+    }
+
 
 }

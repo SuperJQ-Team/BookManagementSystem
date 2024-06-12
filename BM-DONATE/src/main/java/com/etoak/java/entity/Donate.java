@@ -17,10 +17,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class Donate {
     @TableId(value = "id")
-    int id;
+    Integer id;
 
-    @TableField(value = "donor_id")
-    int donorId;
+    @TableField(value = "donor_no")
+    String donorNo;
 
     @TableField(value = "book_name")
     String bookName;
@@ -45,8 +45,11 @@ public class Donate {
     Date donateTime;
 
     @TableField(value = "status")
-    int status;
+    Integer status;
 
     @TableField(value = "score")
-    int score;
+    Integer score;
+
+    @TableField(value = "del_flag")
+    Boolean delFlag;
 }

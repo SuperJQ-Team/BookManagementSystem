@@ -87,4 +87,14 @@ public class UsersController {
             return ResultVO.failed();
         }
     }
+
+    @RequestMapping("/changeScore")
+    public ResultVO changeScore(String userNo, Integer score){
+        int result = usersService.changeScore(userNo, score);
+        if(result>0){
+            return ResultVO.success(null);
+        }else{
+            return ResultVO.failed();
+        }
+    }
 }

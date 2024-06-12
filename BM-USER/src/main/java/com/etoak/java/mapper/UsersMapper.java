@@ -12,4 +12,6 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UsersMapper extends BaseMapper<Users> {
     int blockById(@Param(value = "id")Integer id);
+
+    int changeScore(@Param(value = "no")String no, @Param(value = "score")Integer score);
 }

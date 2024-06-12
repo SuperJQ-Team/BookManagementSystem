@@ -23,4 +23,6 @@ public interface IBookService extends IService<Book>{
     int addByOrder(Order order);
 
     Map getBooksCount(List<String> booksName);
+
+    Integer getScoreWithNo(String no);
 }

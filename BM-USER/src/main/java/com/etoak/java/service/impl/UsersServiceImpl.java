@@ -101,4 +101,19 @@ public class UsersServiceImpl
 
         return usersMapper.updateById(users);
     }
+
+    @Override
+    public int changeScore(String userNo, int score) {
+        if(score < 0) {
+            QueryWrapper<Users> parms = new QueryWrapper<Users>();
+            parms.eq("user_no", userNo);
+
+            Users users = usersMapper.selectOne(parms);
+            if(users.getScore() < -score){
+                return -1;
+            };
+        }
+        usersMapper.changeScore(userNo, score);
+        return 1;
+    }
 }
