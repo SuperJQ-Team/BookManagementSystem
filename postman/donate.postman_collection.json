@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "f9474b86-c0f6-40a1-bbb8-085455982ae2",
+		"name": "donate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34273738"
+	},
+	"item": [
+		{
+			"name": "allow",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/donate-serv/allow?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"donate-serv",
+						"allow"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "not allow",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/donate-serv/notAllow?id=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"donate-serv",
+						"notAllow"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/donate-serv/add?donorNo=114514&bookName=hengaaaa&score=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"donate-serv",
+						"add"
+					],
+					"query": [
+						{
+							"key": "donorNo",
+							"value": "114514"
+						},
+						{
+							"key": "bookName",
+							"value": "hengaaaa"
+						},
+						{
+							"key": "score",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/donate-serv/update?id=1&author=先辈",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"donate-serv",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "author",
+							"value": "先辈"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/donate-serv/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"donate-serv",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/donate-serv/delete?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"donate-serv",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exchange",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/donate-serv/exchange?stuNo=114514&bookNo=202406122043592569",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"donate-serv",
+						"exchange"
+					],
+					"query": [
+						{
+							"key": "stuNo",
+							"value": "114514"
+						},
+						{
+							"key": "bookNo",
+							"value": "202406122043592569"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
