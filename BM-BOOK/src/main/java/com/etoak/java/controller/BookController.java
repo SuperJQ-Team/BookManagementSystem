@@ -75,7 +75,7 @@ public class BookController {
     }
 
     @RequestMapping("/getStatusByNo")
-    public ResultVO getById(String no){
+    public ResultVO getStatusByNo(String no){
         Book result = bookService.getBookByNo(no);
         if(result != null) {
             return ResultVO.success(result.getStatus());
@@ -122,6 +122,17 @@ public class BookController {
     @GetMapping("/getByNoReturnScore")
     public ResultVO addByDonate(String no){
         Integer score = bookService.getScoreWithNo(no);
+        if(score != null) {
+            return ResultVO.success(score);
+        }
+        else{
+            return ResultVO.failed();
+        }
+    }
+
+    @GetMapping("/exchangeBook")
+    public ResultVO exchangeBook(String no){
+        Integer score = bookService.exchangeBook(no);
         if(score != null) {
             return ResultVO.success(score);
         }

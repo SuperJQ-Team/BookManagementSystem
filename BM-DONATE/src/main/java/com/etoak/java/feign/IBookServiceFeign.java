@@ -14,4 +14,6 @@ public interface IBookServiceFeign {
     ResultVO addBook(@RequestParam("donate") Map donate);
     @RequestMapping("/book/getByNoReturnScore")
     ResultVO getScoreByNo(@RequestParam("no") String no);
+
+
 }

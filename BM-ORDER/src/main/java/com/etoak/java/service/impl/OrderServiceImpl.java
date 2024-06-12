@@ -118,12 +118,10 @@ public class OrderServiceImpl
 
                 System.out.println(order);
 
-
                 if (order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
                     /* 在booknumber为null或《=0时设为1 */
                     order.setBookNumbers(1);
                 }
-
 
                 String jsonString = JSON.toJSONStringWithDateFormat(order, "yyyy-MM-dd HH:mm:ss");
                 Map params = JSON.parseObject(jsonString, Map.class);

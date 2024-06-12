@@ -4,7 +4,7 @@
     <update id = "blockById">
         update users set is_block = 1 where id = #{id} and is_block = 0
     </update>
-    <update id="addScore">
+    <update id="changeScore">
         update users set score = score + #{score} where stu_no = #{no};
     </update>
 </mapper>

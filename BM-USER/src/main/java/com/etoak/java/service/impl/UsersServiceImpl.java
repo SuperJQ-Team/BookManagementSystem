@@ -8,6 +8,7 @@ import com.etoak.java.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +24,8 @@ public class UsersServiceImpl
 
     @Override
     public int addUser(Users users) {
+        users.setScore(0);
+        users.setCreateTime(new Date());
         return usersMapper.insert(users);
     }
 
@@ -106,7 +109,7 @@ public class UsersServiceImpl
     public int changeScore(String userNo, int score) {
         if(score < 0) {
             QueryWrapper<Users> parms = new QueryWrapper<Users>();
-            parms.eq("user_no", userNo);
+            parms.eq("stu_no", userNo);
 
             Users users = usersMapper.selectOne(parms);
             if(users.getScore() < -score){

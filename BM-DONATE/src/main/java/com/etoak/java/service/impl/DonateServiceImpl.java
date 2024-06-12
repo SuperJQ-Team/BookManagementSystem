@@ -12,6 +12,7 @@ import com.etoak.java.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,10 @@ public class DonateServiceImpl
 
     @Override
     public int addDonate(Donate donate) {
+        donate.setId(null);
         donate.setStatus(0);
         donate.setDelFlag(false);
+        donate.setDonateTime(new Date());
         return donateMapper.insert(donate);
     }
 
@@ -91,6 +94,7 @@ public class DonateServiceImpl
             userServiceFeign.changeScore(userNo, donate.getScore());
         }
 
+        donate.setId(null);
         String jsonString = JSON.toJSONStringWithDateFormat(donate, "yyyy-MM-dd HH:mm:ss");
         Map params = JSON.parseObject(jsonString, Map.class);
         bookServiceFeign.addBook(params);
@@ -124,7 +128,7 @@ public class DonateServiceImpl
             return 501;
         }
 
-        ResultVO result = userServiceFeign.changeScore(userNo, score);
+        ResultVO result = userServiceFeign.changeScore(userNo, -score);
         if(result.getCode() == 200){
             return 200;
         }else{

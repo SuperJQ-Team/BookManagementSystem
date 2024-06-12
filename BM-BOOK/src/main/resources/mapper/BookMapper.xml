@@ -29,4 +29,8 @@
             </foreach>
         ) group by book_name
     </select>
+
+    <update id="exchangeBook">
+        update book set status = 3 where book_no = #{no}
+    </update>
 </mapper>

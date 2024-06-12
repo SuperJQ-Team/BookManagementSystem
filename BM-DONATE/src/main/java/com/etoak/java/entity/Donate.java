@@ -1,5 +1,6 @@
 package com.etoak.java.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -16,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Donate {
-    @TableId(value = "id")
+    @TableId(value = "id",type = IdType.AUTO)
     Integer id;
 
     @TableField(value = "donor_no")

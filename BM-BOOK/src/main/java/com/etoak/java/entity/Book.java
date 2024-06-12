@@ -59,6 +59,6 @@ public class Book {
     @TableField("update_user")
     private String updateUser;
 
-    @TableField("score")
-    private int score;
+    @TableField("get_score")
+    private Integer getScore;
 }

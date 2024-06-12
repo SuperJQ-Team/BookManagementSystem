@@ -21,6 +21,15 @@ public class BookServiceImpl
 
     @Override
     public int addBook(Book book) {
+        if(book.getGetScore() == null) {
+            book.setGetScore(1);
+        }
+        Random rand = new Random();
+        int MAX = 9999, MIN = 1;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String nowDateString = sdf.format(new Date());
+        String book_no = nowDateString + String.format("%04d" ,rand.nextInt(MAX - MIN + 1) + MIN);
+        book.setBookNo(book_no);
         return bookMapper.insert(book);
     }
 
@@ -135,13 +144,16 @@ public class BookServiceImpl
 
         Book book = bookMapper.selectOne(wrapper);
 
-        if(book == null){
+        if(book == null || book.getStatus() != 0){
             return null;
         }
         else{
-            return book.getScore();
+            return book.getGetScore();
         }
     }
 
 
+    public Integer exchangeBook(String no) {
+        return bookMapper.exchangeBook(no);
+    }
 }

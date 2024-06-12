@@ -68,3 +68,12 @@ spring:
             - Path=/pre-book-serv/**
           filters:
             - StripPrefix=1
+
+        - id: donate_route
+          uri: lb://bm-donate-service
+
+          predicates:
+            - Path=/donate-serv/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/donate
