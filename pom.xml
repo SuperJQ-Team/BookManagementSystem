@@ -20,6 +20,8 @@
         <module>BM-BOOK</module>
         <module>BM-BORROW</module>
         <module>BM-GATWAY</module>
+        <module>BM-PREBOOK</module>
+        <module>BM-DONATE</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -90,6 +92,10 @@
             <version>${spring.cloud.alibaba.version}</version>
             <type>pom</type>
             <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
     </dependencies>
 

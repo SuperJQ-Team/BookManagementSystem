@@ -1,5 +1,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.etoak.java.mapper.BookMapper">
+    <insert id="addBooks" parameterType="java.util.List">
+        insert INTO `bm-book`.book (
+            book_name, author, book_no, publisher, publish_time, durability, storage_time, status, book_label
+        )
+        VALUES
+        <foreach collection="books" item="book" separator=",">
+            (
+             #{book.bookName}, #{book.author}, #{book.bookNo}, #{book.publisher}, #{book.publishTime},
+             #{book.durability}, #{book.storageTime}, #{book.status}, #{book.bookLabel}
+            )
+        </foreach>
+        ;
+    </insert>
+    <select id="getBooksCount_Deprecated">
+        <foreach collection="booksName" item="bookName" separator=" UNION ALL ">
+            select count(*) from `bm-book`.book where book_name = #{bookName}
+        </foreach>
+            ;
+    </select>
 
+    <select id="getBooksCount">
+        select book_name, count(*) as count from `bm-book`.book
+        where book_name in (
+            <foreach collection="booksName" item="bookName" separator=", ">
+                #{bookName}
+            </foreach>
+        ) group by book_name
+    </select>
+
+    <update id="exchangeBook">
+        update book set status = 3 where book_no = #{no}
+    </update>
 </mapper>

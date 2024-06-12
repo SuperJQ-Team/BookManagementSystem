@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.etoak.java.entity.Book;
 import com.etoak.java.entity.Order;
+import com.etoak.java.entity.PublisherAndPrice;
 import com.etoak.java.feign.IBookServiceFeign;
 import com.etoak.java.mapper.OrderMapper;
 import com.etoak.java.service.IOrderService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +36,9 @@ public class OrderServiceImpl
     public List<Order> get(Order order) {
         QueryWrapper<Order> wrapper = new QueryWrapper<>();
 
+        if(order.getId() != null){
+            wrapper.eq("id", order.getId());
+        }
         if(order.getOrderNo() != null && !"".equals(order.getOrderNo())){
             wrapper.like("order_no", order.getOrderNo());
         }
@@ -69,6 +74,13 @@ public class OrderServiceImpl
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String order_no = orderBefore + sdf.format(new Date());
+
+        if(order.getTotalPrice() == null){
+            order.setTotalPrice(BigDecimal.ZERO);
+        }
+        if(order.getBookNumbers() == null){
+            order.setBookNumbers(1);
+        }
 
         order.setOrderNo(order_no);
         return orderMapper.insert(order);
@@ -106,34 +118,16 @@ public class OrderServiceImpl
 
                 System.out.println(order);
 
-                Book book = new Book();
-                book.setBookName(order.getBookName());
-                book.setBookLabel(order.getBookLabel());
-                book.setAuthor(order.getAuthor());
-                book.setPublisher(order.getPublisher());
-                book.setPublishTime(order.getPublishTime());
-
-                Random rand = new Random();
-                int MAX = 9999, MIN = 1;
-
                 if (order.getBookNumbers() == null || order.getBookNumbers() <= 0) {
                     /* 在booknumber为null或《=0时设为1 */
                     order.setBookNumbers(1);
                 }
 
-                for (int i = 0; i < order.getBookNumbers(); ++i) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-                    String book_no = sdf.format(new Date()) + (rand.nextInt(MAX - MIN + 1) + MIN);
+                String jsonString = JSON.toJSONStringWithDateFormat(order, "yyyy-MM-dd HH:mm:ss");
+                Map params = JSON.parseObject(jsonString, Map.class);
 
-                    book.setBookNo(book_no);
-                    System.out.println(book);
-                    // 实体类转json字符串 需要引入fastjson依赖
-                    String jsonString = JSON.toJSONString(book);
-                    // json字符串转map
-                    Map params = JSON.parseObject(jsonString, Map.class);
+                bookServiceFeign.addBooks(params);
 
-                    bookServiceFeign.addBook(params);
-                }
             }
             else if (allow == 2) {
                 /* 已驳回 */
@@ -154,8 +148,11 @@ public class OrderServiceImpl
     }
 
     @Override
-    public Integer getSumPrice(String publisher) {
-        return orderMapper.getSumPrice(publisher);
+    public BigDecimal getPublisherPrice(String publisher) {
+        return orderMapper.getPublisherPrice(publisher);
     }
+
+    @Override
+    public List<PublisherAndPrice> getSumPrice() {return orderMapper.getSumPrice(); }
 
 }

@@ -26,4 +26,6 @@ public interface IUsersService extends IService<Users> {
     Users getUsersById(Integer id);
 
     int updateCreditLevelAndBlock(Integer userId, int changeValue);
+
+    int changeScore(String userNo, int score);
 }
