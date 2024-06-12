@@ -25,4 +25,6 @@ public interface IBookService extends IService<Book>{
     Map getBooksCount(List<String> booksName);
 
     Integer getScoreWithNo(String no);
+
+    Integer exchangeBook(String no);
 }

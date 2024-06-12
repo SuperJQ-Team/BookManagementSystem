@@ -130,6 +130,7 @@ public class DonateServiceImpl
 
         ResultVO result = userServiceFeign.changeScore(userNo, -score);
         if(result.getCode() == 200){
+            bookServiceFeign.exchangeBook(bookNo);
             return 200;
         }else{
             return 502;

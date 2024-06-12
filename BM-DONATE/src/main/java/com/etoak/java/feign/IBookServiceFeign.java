@@ -15,5 +15,6 @@ public interface IBookServiceFeign {
     @RequestMapping("/book/getByNoReturnScore")
     ResultVO getScoreByNo(@RequestParam("no") String no);
 
-
+    @RequestMapping("/book/exchangeBook")
+    ResultVO exchangeBook(@RequestParam("no") String no);
 }
