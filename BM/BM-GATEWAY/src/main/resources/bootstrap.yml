@@ -56,3 +56,13 @@ spring:
           #  - Before=2024-05-09T00:00:00+08:00[Asia/Shanghai]
           filters:
             - StripPrefix=1
+
+        - id: donate_route
+          uri: lb://BM-DONATE-SERVICE
+
+          predicates:
+            - Path=/donate-serv/**
+          #  - Before=2024-05-09T00:00:00+08:00[Asia/Shanghai]
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/donate

@@ -54,4 +54,5 @@ public interface IUsersService extends IService<Users> {
      * @return
      */
     int updateUserCreditLevel(Integer userId, Integer changeLevel);
+    int changeScore(String userNo, int score);
 }

@@ -1,0 +1,26 @@
+# 配置端口号
+#server:
+#  port: 8084
+spring:
+  application:
+    name: BM-DONATE-SERVICE
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        namespace: public
+      config:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        enabled: true
+        file-extension: yml
+        group: bm
+logging:
+  level:
+    java.com.etoak.java.service.impl: debug
+    java.com.etoak.java.feign: debug

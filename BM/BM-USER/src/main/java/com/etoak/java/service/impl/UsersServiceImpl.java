@@ -1,5 +1,6 @@
 package com.etoak.java.service.impl;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.etoak.java.entity.Users;
@@ -8,6 +9,7 @@ import com.etoak.java.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -88,4 +90,24 @@ public class UsersServiceImpl
 
 
     }
+    @Override
+    public int changeScore(String userNo, int score) {
+        if(score < 0) {
+            QueryWrapper<Users> parms = new QueryWrapper<Users>();
+            parms.eq("stu_no", userNo);
+
+            Users users = usersMapper.selectOne(parms);
+            if(users.getScore() < -score){
+                return -1;
+            };
+        }
+        usersMapper.changeScore(userNo, score);
+        return 1;
+    }
+
+    @SentinelResource(value = "commonResource")
+    public String commonResource(String from){
+        return ("公共资源被调用了，调用来源："+from);
+    }
+
 }

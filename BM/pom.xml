@@ -20,6 +20,7 @@
         <module>BM-BORROW</module>
         <module>BM-BOOK-EX</module>
         <module>BM-GATEWAY</module>
+        <module>BM-DONATE</module>
     </modules>
 
     <properties>

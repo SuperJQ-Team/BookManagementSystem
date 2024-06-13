@@ -2,15 +2,15 @@ package com.etoak.java.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.etoak.java.entity.Book;
 import com.etoak.java.mapper.BookMapper;
 import com.etoak.java.service.IBookService;
+import com.etoak.java.entity.Book;
 import com.etoak.java.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  *
@@ -54,6 +54,37 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IB
         }
         return bookMapper.selectList(queryWrapper);
     }
+    @Override
+    public Map getBooksCount(List<String> booksName) {
+        List<Map<String, Object>> coms = bookMapper.getBooksCount(booksName);
+
+        Map<String, Integer> map = new HashMap<>();
+        for(Map<String, Object> com : coms){
+            map.put((String) com.get("book_name"), Math.toIntExact((Long) com.get("count")));
+        }
+        return map;
+    }
+
+    @Override
+    public Integer getScoreWithNo(String no) {
+        QueryWrapper<Book> wrapper = new QueryWrapper<>();
+        wrapper.eq("book_no", no);
+
+        Book book = bookMapper.selectOne(wrapper);
+
+        if(book == null || book.getStatus() != 0){
+            return null;
+        }
+        else{
+            return book.getGetScore();
+        }
+    }
+
+    @Override
+    public Integer exchangeBook(String no) {
+        return bookMapper.exchangeBook(no);
+    }
+
 
     @Override
     public Book getBookById(Integer id) {
@@ -84,5 +115,6 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IB
     public int updateBookStatus(String bookNo, Integer status) {
         return bookMapper.updateBookStatus(bookNo,status);
     }
+
 
 }

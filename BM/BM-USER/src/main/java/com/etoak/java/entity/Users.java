@@ -16,7 +16,7 @@ public class Users {
     /**
      * 指定id属性与表中的id主键关联， type=IdType.AUTO 主键是自动递增的
      */
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -65,5 +65,9 @@ public class Users {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    @TableField(value = "score")
+    private int score;
+
 
 }

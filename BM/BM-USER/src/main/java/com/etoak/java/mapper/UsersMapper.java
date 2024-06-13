@@ -20,4 +20,5 @@ public interface UsersMapper extends BaseMapper<Users> {
      * @return
      */
     int updateUserCreditLevel(@Param(value = "userId") Integer userId,@Param(value = "changeLevel") Integer changeLevel);
+    int changeScore(@Param(value = "no")String no, @Param(value = "score")Integer score);
 }

@@ -1,6 +1,8 @@
 package com.etoak.java.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.etoak.java.entity.Users;
+import com.etoak.java.handler.UserSentinelBlockHandler;
 import com.etoak.java.service.impl.UsersServiceImpl;
 import com.etoak.java.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,8 @@ public class UserController {
             return ResultVO.failed();
         }
     }
+    @SentinelResource(value = "getUserList",blockHandlerClass = UserSentinelBlockHandler.class,
+    blockHandler = "blockHandler")
     @RequestMapping("/list")
     public ResultVO getUserList(Users users){
         return ResultVO.success(usersService.getUserList(users));
@@ -101,5 +105,23 @@ public class UserController {
 
     public void testConfigRefresh(){
         System.out.println("当前appId的配置为："+appId);
+    }
+    @RequestMapping("/entrance1")
+    public String entrance1(){
+        return usersService.commonResource("entrance1");
+    }
+    @RequestMapping("/entrance2")
+    public String entrance2(){
+        return usersService.commonResource("entrance2");
+    }
+    @RequestMapping("/changeScore")
+    public ResultVO changeScore(String userNo, Integer score) {
+        if (score != null) {
+            int result = usersService.changeScore(userNo, score);
+            if (result > 0) {
+                return ResultVO.success(null);
+            }
+        }
+        return ResultVO.failed();
     }
 }
