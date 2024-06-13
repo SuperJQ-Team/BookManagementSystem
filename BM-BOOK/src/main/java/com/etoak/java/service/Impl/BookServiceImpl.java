@@ -30,6 +30,7 @@ public class BookServiceImpl
         String nowDateString = sdf.format(new Date());
         String book_no = nowDateString + String.format("%04d" ,rand.nextInt(MAX - MIN + 1) + MIN);
         book.setBookNo(book_no);
+        book.setStatus(0);
         return bookMapper.insert(book);
     }
 

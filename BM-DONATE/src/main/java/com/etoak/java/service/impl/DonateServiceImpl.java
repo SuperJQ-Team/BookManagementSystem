@@ -88,6 +88,12 @@ public class DonateServiceImpl
     @Override
     public int allowDonate(Integer id) {
         Donate donate = donateMapper.selectById(id);
+        if(donate == null){
+            return 502;
+        }
+        if(donate.getStatus() != 0){
+            return 503;
+        }
 
         String userNo = donate.getDonorNo();
         if(userNo != null){

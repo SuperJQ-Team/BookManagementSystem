@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "36443431-0f75-4548-a75e-2cd634453fc9",
+		"name": "others",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34273738"
+	},
+	"item": [
+		{
+			"name": "users/list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114514"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/user-serv/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"user-serv",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users/add",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114514"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/user-serv/add?name=lh&stuNo=114514",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"user-serv",
+						"add"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "lh"
+						},
+						{
+							"key": "stuNo",
+							"value": "114514"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book/list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "114514"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/book-serv/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"book-serv",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

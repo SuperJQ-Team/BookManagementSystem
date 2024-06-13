@@ -23,7 +23,7 @@ public class DonateController {
             return ResultVO.success(null);
         }
         else{
-            return ResultVO.failed();
+            return ResultVO.failed(String.valueOf(result));
         }
     }
 
@@ -45,7 +45,7 @@ public class DonateController {
             return ResultVO.success(result);
         }
         else{
-            return ResultVO.failed();
+            return ResultVO.failed(String.valueOf(result));
         }
     }
 
@@ -56,7 +56,7 @@ public class DonateController {
             return ResultVO.success(null);
         }
         else{
-            return ResultVO.failed();
+            return ResultVO.failed(String.valueOf(result));
         }
     }
 
@@ -67,7 +67,7 @@ public class DonateController {
             return ResultVO.success(null);
         }
         else{
-            return ResultVO.failed();
+            return ResultVO.failed(String.valueOf(result));
         }
     }
 
@@ -78,7 +78,7 @@ public class DonateController {
             return ResultVO.success(null);
         }
         else{
-            return ResultVO.failed();
+            return ResultVO.failed(String.valueOf(result));
         }
     }
 
@@ -89,7 +89,7 @@ public class DonateController {
             return ResultVO.success(null);
         }
         else{
-            return ResultVO.failed();
+            return ResultVO.failed(String.valueOf(result));
         }
     }
 }
